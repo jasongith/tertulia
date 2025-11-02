@@ -1,13 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
 export default defineConfig({
+  site: 'https://jasongith.github.io/tertulia',
+  base: '/tertulia/',
   vite: {
     plugins: [tailwindcss()]
-  },
-  site: 'https://jasongith.github.io/',
-  base: '/tertulia/',
+  }
 });
