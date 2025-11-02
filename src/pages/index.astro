@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MenuCategory from "../components/MenuCategory.astro";
+import CategoryNavigation from "../components/CategoryNavigation.astro";
+import menuData from "../data/menu.json";
+
+// Define icons for each category
+const categoryIcons: Record<string, string> = {
+  Cafés: "☕",
+  Vinos: "🍷",
+  Cervezas: "🍺",
+  Refrescos: "🥤",
+};
+
+const categories = Object.keys(menuData);
+---
+
+<Layout title="La Tertulia - Carta de Bebidas">
+  <!-- Smart Category Navigation -->
+  <CategoryNavigation categories={categories} icons={categoryIcons} />
+
+  <!-- Menu Categories -->
+  <div class="space-y-12">
+    {
+      Object.entries(menuData).map(([categoryName, items]) => (
+        <MenuCategory
+          title={categoryName}
+          items={items}
+          icon={categoryIcons[categoryName] || "🍽️"}
+        />
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  @keyframes fade-in-slow {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-slow {
+    animation: fade-in-slow 0.8s ease-out forwards;
+  }
+
+  /* Smooth scroll offset for fixed header */
+  html {
+    scroll-padding-top: 100px;
+  }
+</style>
